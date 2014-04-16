@@ -16,17 +16,27 @@ $(document).ready(function() {
 
   google.maps.event.addListener(map, 'click', function(event) {
    placeMarker(event.latLng);
+   // console.log("longitude below")
+   // console.log(event.latLng["k"])
+   // console.log(event.latLng["A"])
   });
 
   function placeMarker(location) {
     var marker = new google.maps.Marker({
+      animation: google.maps.Animation.DROP,
       position: location,
       map: map,
       clickable: true
     });
     marker.info = new google.maps.InfoWindow({
-    content: "Hello"
+      content: prompt("Please enter the cool thing","A dead squirrel")
     });
+
+    console.log(marker["position"]["k"]) //lat
+    console.log(marker["position"]["A"]) //long
+    console.log(marker.info["content"]) //content
+
+
     google.maps.event.addListener(marker, 'click', function() {
       marker.info.open(map, marker);
     });
