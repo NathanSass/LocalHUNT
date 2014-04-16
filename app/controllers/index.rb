@@ -3,3 +3,7 @@ get '/' do
   # erb :test
   erb :index
 end
+
+post '/events' do
+
+end
