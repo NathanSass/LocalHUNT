@@ -4,7 +4,7 @@ $(document).ready(function() {
   var mapOptions = {
       center: new google.maps.LatLng(37.7831, -122.4039),
       zoom: 12,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.TERRAIN
   };
   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
@@ -21,8 +21,18 @@ $(document).ready(function() {
   function placeMarker(location) {
     var marker = new google.maps.Marker({
       position: location,
-      map: map
+      map: map,
+      clickable: true
     });
+    marker.info = new google.maps.InfoWindow({
+    content: "Hello"
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+      marker.info.open(map, marker);
+    });
+
+
+
   }
 
 })
