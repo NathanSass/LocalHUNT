@@ -32,9 +32,15 @@ Marker.prototype = {
         map: this.map, //need to have the proper mao
         clickable: true
       });
+      this.addLabel(marker)
       // marker.info = new google.maps.InfoWindow({
       //   content: prompt("Please enter the cool thing","A dead squirrel")
       // });
+  },
+  addLabel: function(marker){
+    marker.info = new google.maps.InfoWindow({
+      content: prompt("Please enter the cool thing","A dead squirrel")
+    });
   }
 }
 
