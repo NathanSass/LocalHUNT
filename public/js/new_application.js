@@ -18,7 +18,8 @@ Map.prototype = {
 }
 
 
-function Marker(){
+function Marker(map){
+  this.map = map
   //need a map
   //they take lat and long
   //options
@@ -28,37 +29,39 @@ Marker.prototype = {
     var marker = new google.maps.Marker({
         animation: google.maps.Animation.DROP,
         position: location,
-        map: map,
+        map: this.map, //need to have the proper mao
         clickable: true
       });
-      marker.info = new google.maps.InfoWindow({
-        content: prompt("Please enter the cool thing","A dead squirrel")
-      });
+      // marker.info = new google.maps.InfoWindow({
+      //   content: prompt("Please enter the cool thing","A dead squirrel")
+      // });
   }
 }
 
-function Controller(){}
+function Controller(map){
+  this.map = map
+}
 
 Controller.prototype = {
-  bindListeners: function(){ /////////issue with marker naming below
-    google.maps.event.addListener(map, 'click', this.createMarker(event.latLng));
+  bindListeners: function(map){ /////////possibly sketchy naming
+    google.maps.event.addListener(map, 'click', this.createMarker.bind(this));
   },
-  createMarker: function(location){
-    var newMarker = new Marker() //sketchy but possibly awesome
-    newMarker.placeMarker(location)
+  createMarker: function(event){
+    var newMarker = new Marker(this.map) //sketchy but possibly awesome
+    newMarker.placeMarker(event.latLng)
 
   }
 }
 
 
 $(document).ready(function(){
-  var controller = new Controller()
 
   var newMap = new Map()
 
   var googleMap = new google.maps.Map(newMap.pageLocation, newMap.mapOptions())
+  var controller = new Controller(googleMap)
 
-  controller.bindListeners()
+  controller.bindListeners(googleMap)
 
 
 })
