@@ -5,5 +5,5 @@ get '/' do
 end
 
 post '/events' do
-
+  p params
 end

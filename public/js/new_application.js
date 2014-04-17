@@ -15,6 +15,10 @@ Map.prototype = {
   };
   return mapOptions
   }
+  // createGoogleMap: function(){
+
+  // var newMap = new Map()
+  // }
 }
 
 
@@ -32,6 +36,9 @@ Marker.prototype = {
       });
       this.addLabel(marker)
       this.bindShowContentListener(marker)
+      var markerObject = this.prepareMarkerForAjax(marker)
+      console.log(markerObject)
+      // this.ajaxSendtoDB(markerObject)
   },
   addLabel: function(marker){
     marker.info = new google.maps.InfoWindow({
@@ -42,6 +49,24 @@ Marker.prototype = {
     google.maps.event.addListener(marker, 'click', function() {
       marker.info.open(this.map, marker);
     });
+  },
+  prepareMarkerForAjax: function(marker){
+    var lat = marker["position"]["k"]
+    var longi = marker["position"]["A"]
+    var content = marker.info["content"]
+    var markerObj = { latitude: lat, longitude: longi, content: content }
+    debugger
+    console.log(markerObj)
+  },
+
+  ajaxSendtoDB: function(data){
+    request: $.ajax({
+      type: "post",
+      url: '/events',
+      data: data
+    })
+    return response
+
   }
 }
 
@@ -50,10 +75,8 @@ function Controller(map){
 }
 
 Controller.prototype = {
-  bindListeners: function(){ /////////possibly sketchy naming
+  bindListeners: function(){
     google.maps.event.addListener(this.map, 'click', this.createMarker.bind(this));
-
-
   },
   initializeMarker: function(){
     return new Marker(this.map)
@@ -61,18 +84,16 @@ Controller.prototype = {
   createMarker: function(event){
     var newMarker = this.initializeMarker()
     newMarker.placeMarker(event.latLng)
-
   }
+  //NEED TO DO ADD IN WAYS TO SEND DATA TO THE MODEL
+
 }
 
 
 $(document).ready(function(){
-
   var newMap = new Map()
-
-  var googleMap = new google.maps.Map(newMap.pageLocation, newMap.mapOptions())
-  var controller = new Controller(googleMap)
-
+  var googleMap = new google.maps.Map(newMap.pageLocation, newMap.mapOptions()) //I need to save this map so I can always reference it
+  var controller = new Controller(googleMap) //redefine the name of google map
   controller.bindListeners(googleMap)
 
 
