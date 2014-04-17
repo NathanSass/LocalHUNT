@@ -15,6 +15,8 @@ gem 'activesupport'
 gem 'activerecord'
 
 gem 'rake'
+gem 'oauth2'
+gem 'google-api-client'
 
 gem 'shotgun'
 
