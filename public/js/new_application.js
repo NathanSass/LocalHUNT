@@ -38,7 +38,10 @@ Marker.prototype = {
       this.bindShowContentListener(marker)
       var markerObject = this.prepareMarkerForAjax(marker)
       console.log(markerObject)
-      // this.ajaxSendtoDB(markerObject)
+      /////////////////
+      ///AJAX CALL HERE
+      /////////////////
+      this.ajaxSendtoDB(markerObject).done(this.onSuccess)
   },
   addLabel: function(marker){
     marker.info = new google.maps.InfoWindow({
@@ -55,18 +58,20 @@ Marker.prototype = {
     var longi = marker["position"]["A"]
     var content = marker.info["content"]
     var markerObj = { latitude: lat, longitude: longi, content: content }
-    debugger
-    console.log(markerObj)
+    return markerObj
   },
 
-  ajaxSendtoDB: function(data){
-    request: $.ajax({
-      type: "post",
-      url: '/events',
-      data: data
-    })
-    return response
-
+  ajaxSendtoDB: function(markerObj){
+     $.ajax({
+        type: "post",
+        url: '/events',
+        data: markerObj,
+        success: this.onSuccess
+      })
+    return response //ERROR HERE
+  },
+  onSuccess: function(){
+    console.log("on success")
   }
 }
 
