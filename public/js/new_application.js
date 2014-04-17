@@ -20,10 +20,8 @@ Map.prototype = {
 
 function Marker(map){
   this.map = map
-  //need a map
-  //they take lat and long
-  //options
 }
+
 Marker.prototype = {
   placeMarker: function(location){
     var marker = new google.maps.Marker({
@@ -33,13 +31,16 @@ Marker.prototype = {
         clickable: true
       });
       this.addLabel(marker)
-      // marker.info = new google.maps.InfoWindow({
-      //   content: prompt("Please enter the cool thing","A dead squirrel")
-      // });
+      this.bindShowContentListener(marker)
   },
   addLabel: function(marker){
     marker.info = new google.maps.InfoWindow({
       content: prompt("Please enter the cool thing","A dead squirrel")
+    });
+  },
+  bindShowContentListener: function(marker){
+    google.maps.event.addListener(marker, 'click', function() {
+      marker.info.open(this.map, marker);
     });
   }
 }
@@ -49,11 +50,16 @@ function Controller(map){
 }
 
 Controller.prototype = {
-  bindListeners: function(map){ /////////possibly sketchy naming
-    google.maps.event.addListener(map, 'click', this.createMarker.bind(this));
+  bindListeners: function(){ /////////possibly sketchy naming
+    google.maps.event.addListener(this.map, 'click', this.createMarker.bind(this));
+
+
+  },
+  initializeMarker: function(){
+    return new Marker(this.map)
   },
   createMarker: function(event){
-    var newMarker = new Marker(this.map) //sketchy but possibly awesome
+    var newMarker = this.initializeMarker()
     newMarker.placeMarker(event.latLng)
 
   }
