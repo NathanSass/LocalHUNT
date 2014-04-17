@@ -5,5 +5,6 @@ get '/' do
 end
 
 post '/events' do
-  p params
+  Event.create(params)
+  params
 end
