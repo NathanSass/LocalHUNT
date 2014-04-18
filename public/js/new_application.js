@@ -43,17 +43,19 @@ Marker.prototype = {
       /////////////////
       this.ajaxSendtoDB(markerObject).done(this.onSuccess)
   },
+
   addLabel: function(marker){
     marker.info = new google.maps.InfoWindow({
-        content: "test"
-      // content: prompt("Please enter the cool thing","A dead squirrel")
+      content: prompt("Please enter the cool thing","A dead squirrel")
     });
   },
+
   bindShowContentListener: function(marker){
     google.maps.event.addListener(marker, 'click', function() {
       marker.info.open(this.map, marker);
     });
   },
+
   prepareMarkerForAjax: function(marker){
     var lat = marker["position"]["k"]
     var longi = marker["position"]["A"]
@@ -69,11 +71,13 @@ Marker.prototype = {
         data: markerObj,
         success: this.onSuccess
       })
-    return response //ERROR HERE
+    return response
   },
+
   onSuccess: function(){
     console.log("on success")
   },
+
   populateMap: function(){
     var response = $.ajax({
         url: '/db',
@@ -82,17 +86,31 @@ Marker.prototype = {
     })
     return response
   },
+
   placePins: function(allEvents){
-    // console.log("you are in the place pins method")
-    // console.log(allEvents)
-    // debugger
     for(var i = 0; i < allEvents.length; i++){
       var latLng = new google.maps.LatLng(allEvents[i]['event']['latitude'],allEvents[i]['event']['longitude']);
-      this.placeMarker(latLng)
-
-
-    }// close for loop
-  }//closes placePins
+      var content = allEvents[i]['event']['content']
+      this.placeDBMarker(latLng, content)
+    }
+  },
+  placeDBMarker: function(location, content){
+    var marker = new google.maps.Marker({
+        animation: google.maps.Animation.DROP,
+        position: location,
+        map: this.map,
+        clickable: true
+      });
+      this.addDBLabel(marker,content)
+      this.bindShowContentListener(marker)
+      var markerObject = this.prepareMarkerForAjax(marker)
+      console.log(markerObject)
+  },
+  addDBLabel: function(marker, content){
+    marker.info = new google.maps.InfoWindow({
+      content: content
+    });
+  }
 }
 
 function Controller(map){
