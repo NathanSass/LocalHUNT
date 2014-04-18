@@ -10,6 +10,7 @@ $(document).ready(function() {
   var markerOptions = {
       position: new google.maps.LatLng(37.7831, -122.4039)
   };
+
   var marker = new google.maps.Marker(markerOptions);
   marker.setMap(map);
 
@@ -27,6 +28,7 @@ $(document).ready(function() {
     marker.info = new google.maps.InfoWindow({
       content: prompt("Please enter the cool thing","A dead squirrel")
     });
+
 
     console.log(marker["position"]["k"])
     console.log(marker["position"]["A"])

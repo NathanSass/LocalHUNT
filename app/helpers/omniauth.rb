@@ -3,12 +3,14 @@ SCOPES = [
 ].join(' ')
 
 def client
-  client ||= OAuth2::Client.new('765378257525.apps.googleusercontent.com', 'qZvfnHYEuCUD1NQLCSb4X6u0', {
+  # client ||= OAuth2::Client.new(ENV['GOOGLE_KEY'], ENV['GOOGLE_SECRET'], {
+  client ||= OAuth2::Client.new('1094927027734.apps.googleusercontent.com', 'CyXCJa44CvFCEOiehlKfOKJg', {
                 :site => 'https://accounts.google.com',
                 :authorize_url => "/o/oauth2/auth",
                 :token_url => "/o/oauth2/token"
               })
 end
+
 
 def redirect_uri
   uri = URI.parse(request.url)
@@ -16,3 +18,4 @@ def redirect_uri
   uri.query = nil
   uri.to_s
 end
+

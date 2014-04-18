@@ -2,6 +2,17 @@ get '/' do
   erb :index
 end
 
+post '/events' do
+  Event.create(params)
+  params
+end
+
+get '/db' do
+  # p "you hit the db route"
+  @events = Event.all
+  @events.to_json
+end
+
 get "/auth" do
   redirect client.auth_code.authorize_url(:redirect_uri => redirect_uri,:scope => SCOPES,:access_type => "offline")
 end
