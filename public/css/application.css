@@ -1,15 +1,44 @@
-.container {
-  margin: 20px auto;
-  width: 600px;
-  padding: 0px 20px 20px 20px;
-  border: 1px dotted black;
-}
-
-th {
-  text-align: left;
-}
 
 html, body, #map {
   height: 100%;
   margin: 0;
+  font-family: 'Nova Oval', cursive;
+  color: rgb(178, 175, 237);
+  background-color: #873248;
 }
+
+.container {
+  margin: auto;
+  max-width: 1000px;
+  width: 90%;
+/*  background-color: red;*/
+  text-align: center;
+}
+
+.container h1 {
+  font-size: 2.5em;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.container img{
+  max-width: 15%;
+  margin-top: -4%;
+  /*margin-right: 24%;*/
+}
+
+.logo{
+  position:relative;
+}
+
+header {
+  text-align: center;
+  padding: .5% 0 1% 0;
+  color: rgb(132, 120, 255);
+  background-color: #6F1919;
+}
+
+/*th {
+  text-align: left;
+}*/

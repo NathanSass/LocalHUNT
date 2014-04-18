@@ -1,6 +1,6 @@
-
-//models
-//some of the functions should accept variables.
+/////////////////
+///MAP MODEL
+/////////////////
 
 function Map(){
   this.pageLocation = document.getElementById('map')
@@ -15,10 +15,6 @@ Map.prototype = {
   };
   return mapOptions
   }
-  // createGoogleMap: function(){
-
-  // var newMap = new Map()
-  // }
 }
 
 
@@ -26,12 +22,16 @@ function Marker(map){
   this.map = map
 }
 
+/////////////////
+///MARKER MODEL
+/////////////////
+
 Marker.prototype = {
   placeMarker: function(location){
     var marker = new google.maps.Marker({
         animation: google.maps.Animation.DROP,
         position: location,
-        map: this.map, //need to have the proper mao
+        map: this.map,
         clickable: true
       });
       this.addLabel(marker)
@@ -113,6 +113,11 @@ Marker.prototype = {
   }
 }
 
+/////////////////
+///CONTROLLER
+/////////////////
+
+
 function Controller(map){
   this.map = map
 }
@@ -128,18 +133,22 @@ Controller.prototype = {
     var newMarker = this.initializeMarker()
     newMarker.placeMarker(event.latLng)
   }
-  //NEED TO DO ADD IN WAYS TO SEND DATA TO THE MODEL
-
 }
 
+
+/////////////////
+///INITIALIZE
+/////////////////
 
 $(document).ready(function(){
   var newMap = new Map()
   var googleMap = new google.maps.Map(newMap.pageLocation, newMap.mapOptions())
-  var controller = new Controller(googleMap) //redefine the name of google map
+  var controller = new Controller(googleMap)
   var addDBMarkers = new Marker(googleMap)
   controller.bindListeners(googleMap)
+
+  /////////////////
+  ///AJAX CALL HERE
+  /////////////////
   addDBMarkers.populateMap().done(addDBMarkers.placePins.bind(addDBMarkers))
-
-
 })
