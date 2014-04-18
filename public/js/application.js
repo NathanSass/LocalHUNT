@@ -29,16 +29,10 @@ $(document).ready(function() {
       content: prompt("Please enter the cool thing","A dead squirrel")
     });
 
-<<<<<<< HEAD
-    pointer_data = [marker.info["content"],marker["position"]["k"],marker["position"]["A"]]
-    console.log(marker["position"]["k"]) //lat
-    console.log(marker["position"]["A"]) //long
-    console.log(marker.info["content"]) //content
-=======
+
     console.log(marker["position"]["k"])
     console.log(marker["position"]["A"])
     console.log(marker.info["content"])
->>>>>>> 4346548dc37db78726dabe931990b63a3452db82
 
 
     google.maps.event.addListener(marker, 'click', function() {

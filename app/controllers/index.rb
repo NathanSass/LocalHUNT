@@ -19,6 +19,7 @@ end
 
 get '/oauth2callback' do
   access_token = client.auth_code.get_token(params[:code], :redirect_uri => redirect_uri)
+  puts "**********#{access_token.params}"
   session[:access_token] = access_token.token
   @message = "Successfully authenticated with the server"
   @access_token = session[:access_token]

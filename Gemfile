@@ -16,9 +16,7 @@ gem 'activerecord'
 
 gem 'rake'
 gem 'oauth2'
-gem 'omniauth'
-gem "omniauth-google-oauth2"
-gem 'omniauth-google'
+
 
 gem 'shotgun'
 
