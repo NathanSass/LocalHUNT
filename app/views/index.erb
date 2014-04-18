@@ -1,2 +1,12 @@
+<% if @access_token %>
+    <div>
+      <p>
+        <button><a href="/sign_out">Sign Out</a></button>
+      </p>
+    </div>
+  <% else %>
+    <button><a href="/auth">Sign In with Google</a></button>
+  <% end %>
+
 
 <div id="map"></div>
