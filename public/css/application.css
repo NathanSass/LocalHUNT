@@ -7,6 +7,10 @@ html, body, #map {
   background-color: #873248;
 }
 
+#map{
+  height: 80%;
+}
+
 .container {
   margin: auto;
   max-width: 1000px;
@@ -39,6 +43,26 @@ header {
   background-color: #6F1919;
 }
 
-/*th {
-  text-align: left;
-}*/
+footer {
+/*background-color: #6F1919;*/
+margin: 2% 0 2% 0;
+}
+
+footer button{
+  /*background: rgb(178, 175, 237);*/
+  /*background: #6F1919;*/
+  height: 30px;
+  width: 200px;
+  font-family: 'Nova Oval', cursive; /*why do i need this here*/
+  color: #6F1919;
+  background: rgb(145, 138, 223);;
+  font-size: 1.25em;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+footer button:hover{
+  background: rgb(133, 113, 235);
+
+}
