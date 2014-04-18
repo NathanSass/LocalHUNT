@@ -35,6 +35,7 @@ $(document).ready(function() {
     console.log(marker.info["content"])
 
 
+
     google.maps.event.addListener(marker, 'click', function() {
       marker.info.open(map, marker);
     });
@@ -43,7 +44,7 @@ $(document).ready(function() {
 
   }
 
-})
 
+})
 
 

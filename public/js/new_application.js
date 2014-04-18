@@ -46,7 +46,7 @@ Marker.prototype = {
 
   addLabel: function(marker){
     marker.info = new google.maps.InfoWindow({
-      content: prompt("Please enter the cool thing","A dead squirrel")
+      content: prompt("Please enter the cool thing","Beyonce left the group!!!!!!")
     });
   },
 
