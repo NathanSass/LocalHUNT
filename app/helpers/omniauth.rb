@@ -12,7 +12,6 @@ def client
 end
 
 
-
 def redirect_uri
   uri = URI.parse(request.url)
   uri.path = '/oauth2callback'
