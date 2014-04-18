@@ -45,7 +45,8 @@ Marker.prototype = {
   },
   addLabel: function(marker){
     marker.info = new google.maps.InfoWindow({
-      content: prompt("Please enter the cool thing","A dead squirrel")
+        content: "test"
+      // content: prompt("Please enter the cool thing","A dead squirrel")
     });
   },
   bindShowContentListener: function(marker){
@@ -62,7 +63,7 @@ Marker.prototype = {
   },
 
   ajaxSendtoDB: function(markerObj){
-     $.ajax({
+     var response = $.ajax({
         type: "post",
         url: '/events',
         data: markerObj,
@@ -72,7 +73,26 @@ Marker.prototype = {
   },
   onSuccess: function(){
     console.log("on success")
-  }
+  },
+  populateMap: function(){
+    var response = $.ajax({
+        url: '/db',
+        type: 'GET',
+        dataType: 'json'
+    })
+    return response
+  },
+  placePins: function(allEvents){
+    // console.log("you are in the place pins method")
+    // console.log(allEvents)
+    // debugger
+    for(var i = 0; i < allEvents.length; i++){
+      var latLng = new google.maps.LatLng(allEvents[i]['event']['latitude'],allEvents[i]['event']['longitude']);
+      this.placeMarker(latLng)
+
+
+    }// close for loop
+  }//closes placePins
 }
 
 function Controller(map){
@@ -97,9 +117,11 @@ Controller.prototype = {
 
 $(document).ready(function(){
   var newMap = new Map()
-  var googleMap = new google.maps.Map(newMap.pageLocation, newMap.mapOptions()) //I need to save this map so I can always reference it
+  var googleMap = new google.maps.Map(newMap.pageLocation, newMap.mapOptions())
   var controller = new Controller(googleMap) //redefine the name of google map
+  var addDBMarkers = new Marker(googleMap)
   controller.bindListeners(googleMap)
+  addDBMarkers.populateMap().done(addDBMarkers.placePins.bind(addDBMarkers))
 
 
 })

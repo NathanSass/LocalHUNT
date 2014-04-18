@@ -8,3 +8,11 @@ post '/events' do
   Event.create(params)
   params
 end
+
+get '/db' do
+  # p "you hit the db route"
+  @events = Event.all
+  @events.to_json
+end
+
+
