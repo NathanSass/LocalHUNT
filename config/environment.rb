@@ -18,6 +18,11 @@ require 'logger'
 require 'sinatra'
 require "sinatra/reloader" if development?
 
+require 'omniauth'
+require 'omniauth-google'
+require "omniauth-google-oauth2"
+
+require 'json'
 require 'oauth2'
 require 'erb'
 

@@ -1,24 +1,24 @@
 get '/' do
-  # Look in app/views/index.erb
-  # erb :test
   erb :index
 end
 
-get '/sign_in' do
-  redirect request_token.authorize_url
+get "/auth" do
+  redirect client.auth_code.authorize_url(:redirect_uri => redirect_uri,:scope => SCOPES,:access_type => "offline")
 end
 
-get '/sign_out' do
+get '/oauth2callback' do
+  access_token = client.auth_code.get_token(params[:code], :redirect_uri => redirect_uri)
+  session[:access_token] = access_token.token
+  @message = "Successfully authenticated with the server"
+  @access_token = session[:access_token]
+  @email = access_token.get('https://www.googleapis.com/userinfo/email?alt=json').parsed
+  session.delete(:access_token)
+  erb :index
+end
+
+get '/sign_out' do #google keeps your authorization cached
   session.clear
   redirect '/'
 end
 
-get '/auth' do
 
-  @access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
-  # User.create(username: @access_token.params[:screen_name], oauth_token: @access_token.token, oauth_secret: @access_token.secret)
-  # session[:user] = @access_token
-
-  session.delete(:request_token)
-  erb :index
-end
