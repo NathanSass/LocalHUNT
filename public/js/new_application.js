@@ -11,35 +11,17 @@ Map.prototype = {
     return this.mapOptions()
   },
   mapOptions: function(position){
-    console.log("map Option")
-    // console.log(position)
     var currentLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
-    // console.log("currentLocation below")
-    // console.log(currentLocation)
     var mapOptions = {
       center: currentLocation,
-      // center: new google.maps.LatLng(37.7831, -122.4039), //change to center: currentLocation
       zoom: 14,
       mapTypeId: google.maps.MapTypeId.TERRAIN
     };
-    console.log("after map options")
-    console.log(mapOptions)
     return mapOptions
   },
    useGeoLocation: function(){
     navigator.geolocation.getCurrentPosition(this.mapOptions.bind(this))
-    // this.mapOptions()
   },
-
-  // useGeoLocation: function(){
-  //   navigator.geolocation.getCurrentPosition(function(position) {
-  //     // var initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-  //     console.log("in useGeoLocation")
-  //     console.log(position)
-  //     return this.mapOptions(position)
-  //   }.bind(this))
-  //   // this.mapOptions()
-  // },
 
   getCurrentLocation: function(){
      return new google.maps.LatLng(location.coords.latitude, location.coords.longitude)
@@ -180,7 +162,8 @@ $(document).ready(function(){
     makeMap: function(position){
       var newMap = new Map()
       googleMap = new google.maps.Map(newMap.pageLocation, newMap.mapOptions(position))
-      var controller = new Controller(googleMap)
+      var cont
+      roller = new Controller(googleMap)
       var addDBMarkers = new Marker(googleMap)
       controller.initialize()
       /////////////////
@@ -189,5 +172,5 @@ $(document).ready(function(){
       addDBMarkers.populateMap().done(addDBMarkers.placePins.bind(addDBMarkers))
     }
   }
-  navigator.geolocation.getCurrentPosition(geo.makeMap)
+  navigator.geolocation.getCurrentPosition(geo.makeMap)//could add code here for error
 })
