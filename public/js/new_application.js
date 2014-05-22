@@ -162,8 +162,7 @@ $(document).ready(function(){
     makeMap: function(position){
       var newMap = new Map()
       googleMap = new google.maps.Map(newMap.pageLocation, newMap.mapOptions(position))
-      var cont
-      roller = new Controller(googleMap)
+      var controller = new Controller(googleMap)
       var addDBMarkers = new Marker(googleMap)
       controller.initialize()
       /////////////////
