@@ -6,9 +6,10 @@ Marker.prototype = {
   placeMarker: function(location){
     var marker = new google.maps.Marker({
         animation: google.maps.Animation.DROP,
-        position: location,
-        map: this.map,
-        clickable: true
+        position:  location,
+        map:       this.map,
+        clickable: true,
+        draggable: true //find a way to toggle this
       });
       this.addLabel(marker)
       this.bindShowContentListener(marker)
@@ -32,9 +33,9 @@ Marker.prototype = {
   },
 
   prepareMarkerForAjax: function(marker){
-    var lat = marker["position"]["k"]
-    var longi = marker["position"]["A"]
-    var content = marker.info["content"]
+    var lat       = marker["position"]["k"]
+    var longi     = marker["position"]["A"]
+    var content   = marker.info["content"]
     var markerObj = { latitude: lat, longitude: longi, content: content }
     return markerObj
   },
@@ -50,13 +51,13 @@ Marker.prototype = {
   },
 
   onSuccess: function(){
-    console.log("on success")
+    console.log("on success, marker model line 54")
   },
 
   populateMap: function(){
     var response = $.ajax({
-        url: '/db',
-        type: 'GET',
+        url:      '/db',
+        type:     'GET',
         dataType: 'json'
     })
     return response
@@ -64,17 +65,17 @@ Marker.prototype = {
 
   placePins: function(allEvents){
     for(var i = 0; i < allEvents.length; i++){
-      var latLng = new google.maps.LatLng(allEvents[i]['event']['latitude'],allEvents[i]['event']['longitude']);
+      var latLng  = new google.maps.LatLng(allEvents[i]['event']['latitude'],allEvents[i]['event']['longitude']);
       var content = allEvents[i]['event']['content']
       this.placeDBMarker(latLng, content)
     }
   },
   placeDBMarker: function(location, content){
     var marker = new google.maps.Marker({
-        animation: google.maps.Animation.DROP,
-        position: location,
-        map: this.map,
-        clickable: true
+        animation:  google.maps.Animation.DROP,
+        position:   location,
+        map:        this.map,
+        clickable:  true
       });
       this.addDBLabel(marker,content)
       this.bindShowContentListener(marker)

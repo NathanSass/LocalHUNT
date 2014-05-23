@@ -10,5 +10,3 @@ get '/db' do
   @events = Event.all
   @events.to_json
 end
-
-
