@@ -3,29 +3,7 @@ $(document).ready(function(){
     // newMap: null,
     makeMap: function(position){
       var newMap = new Map()
-      var styles = [
-    {
-      stylers: [
-        { hue: "#00ffe6" },
-        { saturation: -20 }
-      ]
-    },{
-      featureType: "road",
-      elementType: "geometry",
-      stylers: [
-        { lightness: 100 },
-        { visibility: "simplified" }
-      ]
-    },{
-      featureType: "road",
-      elementType: "labels",
-      stylers: [
-        { visibility: "off" }
-      ]
-    }
-  ];
-
-      var styledMap = new google.maps.StyledMapType(styles, 
+      var styledMap = new google.maps.StyledMapType(newMap.mapStyles(), 
                                                           { name: "Styled Map"});
 
       googleMap = new google.maps.Map(newMap.pageLocation, newMap.mapOptions(position))
