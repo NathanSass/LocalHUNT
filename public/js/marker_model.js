@@ -12,21 +12,15 @@ Marker.prototype = {
         draggable: true,
         icon:      '../img/green_icon.png'
       });
-      this.addLabel(marker)
-      this.bindShowContentListener(marker)
-      
-      google.maps.event.addListener(marker, 'dragstart', function() {
-        console.log(marker.getPosition());
-      });
-      google.maps.event.addListener(marker, 'dragend', function() {
-        console.log(marker.getPosition());
-      });
 
+      this.addLabel(marker);
+      this.bindShowContentListener(marker);
+      this.updateMarkerPositionAfterDrag(marker);
       var markerObject = this.prepareMarkerForAjax(marker)
       /////////////////
       ///AJAX CALL HERE
       /////////////////
-      this.ajaxSendtoDB(markerObject).done(this.onSuccess)
+      this.ajaxSendtoDB(markerObject).done(this.onSuccess);
   },
 
   addLabel: function(marker){
@@ -35,9 +29,27 @@ Marker.prototype = {
     });
   },
 
-  bindMarkerListeners: function(){
-    this.bindShowContentListener();
-  }
+  updateMarkerPositionAfterDrag: function(marker){
+   
+    google.maps.event.addListener(marker, 'dragstart', function() {
+      var before = this.prepareMarkerForAjax(marker)
+      console.log(before);
+    }.bind(this));
+    
+    google.maps.event.addListener(marker, 'dragend', function() {
+      var after = this.prepareMarkerForAjax(marker)
+      console.log(after);
+    }.bind(this));
+
+    // google.maps.event.addListener(marker, 'dragstart', function() {
+    //   var before = this.prepareMarkerForAjax(marker)
+    // }.bind(this));
+    
+    // google.maps.event.addListener(marker, 'dragend', function() {
+    //   var after = this.prepareMarkerForAjax(marker)
+    // }.bind(this));
+    // debugger
+  },
 
   bindShowContentListener: function(marker){
     google.maps.event.addListener(marker, 'click', function() {
