@@ -7,8 +7,10 @@ as possible in order to get a feel for its unique feel. I found incredible views
 ###Technologies
 This is a javascript on sinatra app. The majority of the funcitonality is created with MVC vanilla javascript.
 I needed sinatra to build out a persistence layer so I could store data.
-- ruby
+
 - javascript
+- sinatra framework
+- ruby
 - jquery
 - googlemaps API
 - event driven programming
@@ -16,6 +18,10 @@ I needed sinatra to build out a persistence layer so I could store data.
 - Heroku
 - postgreSQL
 - HTML5 geolocation
+
+####TODO
+- make mobile responsive
+- improve styling of site and markers
 
 #####Concept Work
 ![](https://dl.dropboxusercontent.com/u/2048705/white.jpg)
