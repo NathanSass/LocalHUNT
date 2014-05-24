@@ -8,12 +8,19 @@ Controller.prototype = {
   },
 
   bindListeners: function(){
-    google.maps.event.addListener(this.map, 'click', this.createMarker.bind(this));
+    $('button').click(function(){
+      this.allowMapClick(); 
+    }.bind(this));
   },
 
-  createMarker: function(event){
+  allowMapClick: function(){
+    var listener = google.maps.event.addListener(this.map, 'click', this.createDBMarkers.bind(this));
+  },
+
+  createDBMarkers: function(event){
     var newMarker = this.initializeMarker()
     newMarker.placeMarker(event.latLng)
+    google.maps.event.clearInstanceListeners(this.map);
   },
 
   initializeMarker: function(){

@@ -11,4 +11,9 @@ get '/db' do
   @events.to_json
 end
 
-
+post '/events/update' do
+	p "* " * 30
+	p params
+	p params["initialPos"]["latitude"]
+	p "* " * 30
+end
