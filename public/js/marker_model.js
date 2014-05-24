@@ -32,10 +32,9 @@ Marker.prototype = {
   updateMarkerPositionAfterDrag: function(marker){
     google.maps.event.addListener(marker, 'dragstart', function(){
       var dragStart = this.prepareMarkerForAjax(marker)
-      
       google.maps.event.addListener(marker, 'dragend', function(){
         var dragEnd    = this.prepareMarkerForAjax(marker)
-        var markerInfo = { intialPos: dragStart, endPos: dragEnd }
+        var markerInfo = { initialPos: dragStart, endPos: dragEnd }
         /////////////////
         ///AJAX CALL HERE
         /////////////////
