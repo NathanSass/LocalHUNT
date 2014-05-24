@@ -9,7 +9,7 @@ Marker.prototype = {
         position:  location,
         map:       this.map,
         clickable: true,
-        draggable: true,
+        // draggable: true, ADD THIS LINE BACK IN FOR FULL FUNCATIONALITY
         icon:      '../img/green_icon.png'
       });
 
