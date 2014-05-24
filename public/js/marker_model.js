@@ -30,25 +30,29 @@ Marker.prototype = {
   },
 
   updateMarkerPositionAfterDrag: function(marker){
-   
-    google.maps.event.addListener(marker, 'dragstart', function() {
-      var before = this.prepareMarkerForAjax(marker)
-      console.log(before);
+    google.maps.event.addListener(marker, 'dragstart', function(){
+      var initial = this.prepareMarkerForAjax(marker)
+      google.maps.event.addListener(marker, 'dragend', function(){
+        var end = this.prepareMarkerForAjax(marker)
+        console.log({ beginPos: initial, endPos: end })
+      }.bind(this))
+
     }.bind(this));
-    
+  },
+
+  markerDragStart: function(marker){
+    google.maps.event.addListener(marker, 'dragstart', function(){
+      console.log(this.prepareMarkerForAjax(marker))
+    }.bind(this));
+  },
+
+
+  markerDragEnd: function(marker){
     google.maps.event.addListener(marker, 'dragend', function() {
       var after = this.prepareMarkerForAjax(marker)
       console.log(after);
+      return after
     }.bind(this));
-
-    // google.maps.event.addListener(marker, 'dragstart', function() {
-    //   var before = this.prepareMarkerForAjax(marker)
-    // }.bind(this));
-    
-    // google.maps.event.addListener(marker, 'dragend', function() {
-    //   var after = this.prepareMarkerForAjax(marker)
-    // }.bind(this));
-    // debugger
   },
 
   bindShowContentListener: function(marker){
