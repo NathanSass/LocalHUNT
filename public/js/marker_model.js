@@ -20,7 +20,7 @@ Marker.prototype = {
       /////////////////
       ///AJAX CALL HERE
       /////////////////
-      this.ajaxSendtoDB(markerObject).done(this.onSuccess);
+      this.ajaxSendtoDB(markerObject, '/events').done(this.onSuccess);
   },
 
   addLabel: function(marker){
@@ -31,27 +31,16 @@ Marker.prototype = {
 
   updateMarkerPositionAfterDrag: function(marker){
     google.maps.event.addListener(marker, 'dragstart', function(){
-      var initial = this.prepareMarkerForAjax(marker)
+      var dragStart = this.prepareMarkerForAjax(marker)
+      
       google.maps.event.addListener(marker, 'dragend', function(){
-        var end = this.prepareMarkerForAjax(marker)
-        console.log({ beginPos: initial, endPos: end })
+        var dragEnd    = this.prepareMarkerForAjax(marker)
+        var markerInfo = { intialPos: dragStart, endPos: dragEnd }
+        /////////////////
+        ///AJAX CALL HERE
+        /////////////////
+        this.ajaxSendtoDB(markerInfo, '/events/update').done(this.onSuccess);
       }.bind(this))
-
-    }.bind(this));
-  },
-
-  markerDragStart: function(marker){
-    google.maps.event.addListener(marker, 'dragstart', function(){
-      console.log(this.prepareMarkerForAjax(marker))
-    }.bind(this));
-  },
-
-
-  markerDragEnd: function(marker){
-    google.maps.event.addListener(marker, 'dragend', function() {
-      var after = this.prepareMarkerForAjax(marker)
-      console.log(after);
-      return after
     }.bind(this));
   },
 
@@ -73,10 +62,10 @@ Marker.prototype = {
     return Math.round(num * 1000) / 1000
   },
 
-  ajaxSendtoDB: function(markerObj){
+  ajaxSendtoDB: function(markerObj, action){
      var response = $.ajax({
-        type: "post",
-        url: '/events',
+        type: 'POST',
+        url: action,
         data: markerObj,
         success: this.onSuccess
       })
@@ -89,8 +78,8 @@ Marker.prototype = {
 
   populateMap: function(){
     var response = $.ajax({
-        url:      '/db',
         type:     'GET',
+        url:      '/db',
         dataType: 'json'
     })
     return response

@@ -10,3 +10,9 @@ get '/db' do
   @events = Event.all
   @events.to_json
 end
+
+post '/events/update' do
+	p "* " * 30
+	p params
+	p "* " * 30
+end
