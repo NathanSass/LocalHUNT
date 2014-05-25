@@ -2,6 +2,7 @@ $(document).ready(function(){
   var geo = {
     // newMap: null,
     makeMap: function(position){
+      console.log(position); //current location here
       var newMap     = new Map();
       // var mapStyling = new MapStyling();
       var styledMap  = new google.maps.StyledMapType(newMap.mapStyles(), 

@@ -24,9 +24,13 @@ Marker.prototype = {
   },
 
   addLabel: function(marker){
-    marker.info = new google.maps.InfoWindow({
-      content: prompt("Please enter the cool thing","A dead squirrel")
-    });
+    //show form field here with click listener
+    // $('form button').click(function(){
+      marker.info = new google.maps.InfoWindow({
+        content: $('input').val()
+      });
+      
+    // })
   },
 
   updateMarkerPositionAfterDrag: function(marker){

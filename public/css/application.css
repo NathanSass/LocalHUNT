@@ -64,5 +64,10 @@ footer button{
 
 footer button:hover{
   background: rgb(133, 113, 235);
+}
 
+/*MAP POPUPS*/
+
+.gm-style .gm-style-iw {
+  font-size: 1.5em;
 }
