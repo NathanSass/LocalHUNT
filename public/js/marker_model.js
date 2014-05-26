@@ -9,7 +9,7 @@ Marker.prototype = {
         position:  location,
         map:       this.map,
         clickable: true,
-        draggable: true, //ADD THIS LINE BACK IN FOR FULL FUNCATIONALITY
+        draggable: true,
         icon:      '../img/green_icon.png'
       });
 
@@ -64,7 +64,7 @@ Marker.prototype = {
   },
 
   _roundNumber: function(num){
-    return Math.round(num * 1000) / 1000
+    return Math.round(num * 10000) / 10000
   },
 
   ajaxSendtoDB: function(markerObj, action){
