@@ -9,7 +9,7 @@ Marker.prototype = {
         position:  location,
         map:       this.map,
         clickable: true,
-        // draggable: true, ADD THIS LINE BACK IN FOR FULL FUNCATIONALITY
+        draggable: true, //ADD THIS LINE BACK IN FOR FULL FUNCATIONALITY
         icon:      '../img/green_icon.png'
       });
 
@@ -35,14 +35,16 @@ Marker.prototype = {
 
   updateMarkerPositionAfterDrag: function(marker){
     google.maps.event.addListener(marker, 'dragstart', function(){
-      var dragStart = this.prepareMarkerForAjax(marker)
-      google.maps.event.addListener(marker, 'dragend', function(){
-        var dragEnd    = this.prepareMarkerForAjax(marker)
-        var markerInfo = { initialPos: dragStart, endPos: dragEnd }
+      var dragStart = this.prepareMarkerForAjax(marker);
+      var dragEndListener = google.maps.event.addListener(marker, 'dragend', function(){
+        google.maps.event.removeListener(dragEndListener);
+        var dragEnd    = this.prepareMarkerForAjax(marker);
+        var markerInfo = { initialPos: dragStart, endPos: dragEnd };
         /////////////////
         ///AJAX CALL HERE
         /////////////////
         this.ajaxSendtoDB(markerInfo, '/events/update').done(this.onSuccess);
+
       }.bind(this))
     }.bind(this));
   },
