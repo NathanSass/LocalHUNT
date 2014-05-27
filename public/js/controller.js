@@ -7,10 +7,10 @@ Controller.prototype = {
   initialize: function(){
     this.bindListeners()
   },
-//re write these to drop a pin on position
+
   bindListeners: function(){
     this.showForm()
-    $('.drop-pin').click(this.createDBMarkers.bind(this))
+    this.createNewMarker()
   },
 
   showForm: function(){
@@ -19,15 +19,10 @@ Controller.prototype = {
     });
   },
 
-  createDBMarkers: function(event){
-    var newMarker = this.initializeMarker()
-    // debugger
-    // debugger
-    newMarker.placeMarker(this.position)
-    // google.maps.event.clearInstanceListeners(this.map);
-  },
-
-  initializeMarker: function(){
-    return new Marker(this.map)
+  createNewMarker: function(event){
+    $('.drop-pin').click(function(){
+      var newMarker = new Marker(this.map)
+      newMarker.placeMarker(this.position)
+    }.bind(this))
   }
 }

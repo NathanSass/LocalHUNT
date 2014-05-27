@@ -8,7 +8,7 @@ Map.prototype = {
     return this.mapOptions()
   },
 
-  mapOptions: function(position){
+  mapOptions: function(){
     var mapOptions = {
       center: this.currentLocation,
       zoom: 14,
