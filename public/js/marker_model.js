@@ -112,7 +112,7 @@ Marker.prototype = {
 
   addDBLabel: function(marker, content){
     marker.info = new google.maps.InfoWindow({
-      content: content
+      content: '<p class="marker-txt">' + content + '</p>'
     });
   }
 }
