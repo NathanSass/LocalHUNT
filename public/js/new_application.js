@@ -2,15 +2,14 @@ $(document).ready(function(){
   var geo = {
     // newMap: null,
     makeMap: function(position){
+      var currentLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
       console.log(position); //current location here
-      var newMap     = new Map();
-      // var mapStyling = new MapStyling();
-      var styledMap  = new google.maps.StyledMapType(newMap.mapStyles(), 
-                                                          { name: "Styled Map"});
-      googleMap = new google.maps.Map(newMap.pageLocation, newMap.mapOptions(position))
+      var newMap     = new Map(currentLocation);
+      var styledMap  = new google.maps.StyledMapType(newMap.mapStyles(), { name: "Styled Map"});
+      googleMap      = new google.maps.Map(newMap.pageLocation, newMap.mapOptions(position))
       googleMap.mapTypes.set('map_style', styledMap);
       googleMap.setMapTypeId('map_style');
-      var controller   = new Controller(googleMap)
+      var controller   = new Controller(googleMap, currentLocation)
       var addDBMarkers = new Marker(googleMap)
       controller.initialize()
       /////////////////
