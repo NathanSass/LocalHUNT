@@ -1,5 +1,6 @@
-function Map(){
+function Map(currentLocation){
   this.pageLocation = document.getElementById('map')
+  this.currentLocation = currentLocation
 };
 
 Map.prototype = {
@@ -7,10 +8,9 @@ Map.prototype = {
     return this.mapOptions()
   },
 
-  mapOptions: function(position){
-    var currentLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
+  mapOptions: function(){
     var mapOptions = {
-      center: currentLocation,
+      center: this.currentLocation,
       zoom: 14,
       mapTypeControlOptions: {
         mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']

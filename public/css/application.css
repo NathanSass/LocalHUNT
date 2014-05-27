@@ -7,6 +7,10 @@ html, body, #map {
   background-color: #873248;
 }
 
+form{
+  display: none;
+}
+
 #map{
   height: 70%;
 }

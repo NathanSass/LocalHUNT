@@ -1,5 +1,6 @@
-function Controller(map){
+function Controller(map, position){
   this.map = map
+  this.position = position
 }
 
 Controller.prototype = {
@@ -8,22 +9,20 @@ Controller.prototype = {
   },
 
   bindListeners: function(){
-    $('button').click(function(){
-      this.allowMapClick(); 
-    }.bind(this));
+    this.showForm()
+    this.createNewMarker()
   },
 
-  allowMapClick: function(){
-    var listener = google.maps.event.addListener(this.map, 'click', this.createDBMarkers.bind(this));
+  showForm: function(){
+    $('.mark-something').click(function(){
+      $('form').show('slow')
+    });
   },
 
-  createDBMarkers: function(event){
-    var newMarker = this.initializeMarker()
-    newMarker.placeMarker(event.latLng)
-    google.maps.event.clearInstanceListeners(this.map);
-  },
-
-  initializeMarker: function(){
-    return new Marker(this.map)
+  createNewMarker: function(event){
+    $('.drop-pin').click(function(){
+      var newMarker = new Marker(this.map)
+      newMarker.placeMarker(this.position)
+    }.bind(this))
   }
 }
