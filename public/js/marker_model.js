@@ -9,7 +9,7 @@ Marker.prototype = {
         position:  location,
         map:       this.map,
         clickable: true,
-        // draggable: true, ADD THIS LINE BACK IN FOR FULL FUNCATIONALITY
+        draggable: true,
         icon:      '../img/green_icon.png'
       });
 
@@ -24,21 +24,27 @@ Marker.prototype = {
   },
 
   addLabel: function(marker){
-    marker.info = new google.maps.InfoWindow({
-      content: prompt("Please enter the cool thing","A dead squirrel")
-    });
+    //show form field here with click listener
+    // $('form button').click(function(){
+      marker.info = new google.maps.InfoWindow({
+        content: $('input').val()
+      });
+      
+    // })
   },
 
   updateMarkerPositionAfterDrag: function(marker){
     google.maps.event.addListener(marker, 'dragstart', function(){
-      var dragStart = this.prepareMarkerForAjax(marker)
-      google.maps.event.addListener(marker, 'dragend', function(){
-        var dragEnd    = this.prepareMarkerForAjax(marker)
-        var markerInfo = { initialPos: dragStart, endPos: dragEnd }
+      var dragStart = this.prepareMarkerForAjax(marker);
+      var dragEndListener = google.maps.event.addListener(marker, 'dragend', function(){
+        google.maps.event.removeListener(dragEndListener);
+        var dragEnd    = this.prepareMarkerForAjax(marker);
+        var markerInfo = { initialPos: dragStart, endPos: dragEnd };
         /////////////////
         ///AJAX CALL HERE
         /////////////////
         this.ajaxSendtoDB(markerInfo, '/events/update').done(this.onSuccess);
+
       }.bind(this))
     }.bind(this));
   },
@@ -58,7 +64,7 @@ Marker.prototype = {
   },
 
   _roundNumber: function(num){
-    return Math.round(num * 1000) / 1000
+    return Math.round(num * 10000) / 10000
   },
 
   ajaxSendtoDB: function(markerObj, action){

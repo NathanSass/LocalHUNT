@@ -12,8 +12,11 @@ get '/db' do
 end
 
 post '/events/update' do
-	p "* " * 30
-	p params
-	p params["initialPos"]["latitude"]
-	p "* " * 30
+	initial_lat    = params["initialPos"]["latitude"]
+	initial_long   = params["initialPos"]["longitude"]
+	end_lat        = params["endPos"]["latitude"]
+	end_long       = params["endPos"]["longitude"]
+	
+	current_marker = Event.where("latitude = ? AND longitude = ?", initial_lat, initial_long).last
+	current_marker.update_attributes(latitude: end_lat, longitude: end_long)
 end
