@@ -9,10 +9,11 @@ html, body, #map {
 
 form{
   display: none;
+  padding: 0 0 .6em 0; 
 }
 
 #map{
-  height: 70%;
+  height: 85%;
 }
 
 .map_canvas img {
@@ -51,9 +52,18 @@ header {
   background-color: #6F1919;
 }
 
+.bottom{
+  padding: 1em 0 0 0;
+}
+
 footer {
+  background-color: #873248;
 /*background-color: #6F1919;*/
-margin: 2% 0 2% 0;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  margin: 2% 0 2% 0;
+  width: 100%;
 }
 
 footer button{
@@ -68,6 +78,14 @@ footer button{
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+}
+
+form input{
+  height: 22px;
+  width: 190px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+
 }
 
 footer button:hover{

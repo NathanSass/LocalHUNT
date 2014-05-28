@@ -18,17 +18,17 @@
     </div>
   </div>
     <%= yield %>
-  <div class="container">
     <footer>
+  <div class="container bottom">
     <form>
       <p> Drop A Marker At Your Current Location </p>
-      <input type="text" placeholder="Describe the spot!">
+      <input type="text" placeholder="Describe the spot!"><br>
       <button type="button" class="drop-pin">DROP PIN</button>
       <p>( You can drag and relocate after if you want )</p>
     </form>
     <button type="button" class="mark-something">Mark Something!</button>
-    </footer>
   </div>
+    </footer>
   <script src="/js/controller.js"></script>
   <script src="/js/marker_model.js"></script>
   <script src="/js/map_model.js"></script>

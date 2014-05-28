@@ -15,7 +15,7 @@ Controller.prototype = {
 
   showForm: function(){
     $('.mark-something').click(function(){
-      $('form').show('slow')
+      $('form').toggle('slow')
     });
   },
 
@@ -23,6 +23,7 @@ Controller.prototype = {
     $('.drop-pin').click(function(){
       var newMarker = new Marker(this.map)
       newMarker.placeMarker(this.position)
+      $('form').hide('slow')
     }.bind(this))
   }
 }
