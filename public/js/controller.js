@@ -17,19 +17,23 @@ Controller.prototype = {
     $('.mark-something').click(function(){
       $('form').toggle('slow')
       $('.mark-something').toggleClass('drop-pin');
-      this.createNewMarker();
+      if($('input').val().length > 5){
+        this.createNewMarker();
+      }
     }.bind(this));
   },
 
   createNewMarker: function(event){
     $('.drop-pin').on("click", function(){
-       console.log("in drop")
-      var newMarker = new Marker(this.map)
-      newMarker.placeMarker(this.position)
-      $('form').hide('slow')
-      $(".drop-pin").unbind( "click");
-      $(".mark-something").unbind( "click");
-      this.bindListeners();
+      // if($('input').val().length > 5){
+        var newMarker = new Marker(this.map)
+        newMarker.placeMarker(this.position)
+        $('form').hide('slow')
+        $(".drop-pin").unbind( "click");
+        $(".mark-something").unbind( "click");
+        this.bindListeners();
+        
+      // }
     }.bind(this))
   }
 }

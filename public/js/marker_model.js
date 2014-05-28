@@ -12,7 +12,6 @@ Marker.prototype = {
         draggable: true,
         icon:      '../img/green_icon.png'
       });
-
       this.addLabel(marker);
       this.bindShowContentListener(marker);
       this.updateMarkerPositionAfterDrag(marker);
