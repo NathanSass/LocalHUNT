@@ -55,9 +55,9 @@ Marker.prototype = {
   },
 
   prepareMarkerForAjax: function(marker){
-    var lat       = this._roundNumber(marker["position"]["k"]);
-    var longi     = this._roundNumber(marker["position"]["A"]);
-    var content   = marker.info["content"]
+    var lat       = this._roundNumber(marker['position']['k']);
+    var longi     = this._roundNumber(marker['position']['A']);
+    var content   = marker.info['content']
     var markerObj = { latitude: lat, longitude: longi, content: content }
     return markerObj
   },
@@ -77,7 +77,7 @@ Marker.prototype = {
   },
 
   onSuccess: function(){
-    console.log("on success, marker model line 54")
+    console.log('on success, marker model line 54')
   },
 
   populateMap: function(){
