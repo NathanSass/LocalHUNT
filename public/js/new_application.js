@@ -1,6 +1,5 @@
 $(document).ready(function(){
   var geo = {
-  
     makeMap: function(position){
       var currentLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
       var newMap     = new Map(currentLocation);
