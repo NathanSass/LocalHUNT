@@ -12,7 +12,6 @@ Marker.prototype = {
         draggable: true,
         icon:      '../img/green_icon.png'
       });
-
       this.addLabel(marker);
       this.bindShowContentListener(marker);
       this.updateMarkerPositionAfterDrag(marker);
@@ -35,7 +34,7 @@ Marker.prototype = {
 
   updateMarkerPositionAfterDrag: function(marker){
     google.maps.event.addListener(marker, 'dragstart', function(){
-      var dragStart = this.prepareMarkerForAjax(marker);
+      var dragStart       = this.prepareMarkerForAjax(marker);
       var dragEndListener = google.maps.event.addListener(marker, 'dragend', function(){
         google.maps.event.removeListener(dragEndListener);
         var dragEnd    = this.prepareMarkerForAjax(marker);

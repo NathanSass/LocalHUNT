@@ -10,19 +10,28 @@ Controller.prototype = {
 
   bindListeners: function(){
     this.showForm()
-    this.createNewMarker()
   },
 
   showForm: function(){
     $('.mark-something').click(function(){
-      $('form').show('slow')
-    });
+      $('form').toggle('slow')
+      $('.mark-something').toggleClass('drop-pin');
+      this.createNewMarker()
+    }.bind(this));
   },
 
   createNewMarker: function(event){
-    $('.drop-pin').click(function(){
-      var newMarker = new Marker(this.map)
-      newMarker.placeMarker(this.position)
+    $('.drop-pin').on("click", function(){
+      console.log("below drop-pin")
+      if($('input').val().length > 5){
+        console.log("in input")
+        var newMarker = new Marker(this.map)
+        newMarker.placeMarker(this.position)
+        $('form').hide('slow')
+      }
+        $(".drop-pin").unbind( "click");
+        $(".mark-something").unbind( "click");
+        this.bindListeners();
     }.bind(this))
   }
 }
