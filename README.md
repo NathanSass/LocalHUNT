@@ -19,10 +19,14 @@ I needed sinatra to build out a persistence layer so I could store data.
 - postgreSQL
 - HTML5 geolocation
 
-####TODO
+####COOL PARTS
+- Changing the function of the bottom at the bottom.
+- Updating the position of the marker when it is being dragged.
+
+#####TODO
 - make mobile responsive
 - improve styling of site and markers
 
-#####Concept Work
+######Concept Work
 ![](https://dl.dropboxusercontent.com/u/2048705/white.jpg)
 ![](https://dl.dropboxusercontent.com/u/2048705/PM.png)
