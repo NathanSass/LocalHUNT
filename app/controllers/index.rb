@@ -7,8 +7,12 @@ post '/events' do
 end
 
 get '/db' do
-  @events = Event.all
-  @events.to_json
+  events = Event.all
+  p ('* ')* 30
+  p events.to_json
+  p ('* ')* 30
+  events.to_json
+
 end
 
 post '/events/update' do
