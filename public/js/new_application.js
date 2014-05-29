@@ -2,6 +2,8 @@ $(document).ready(function(){
   var geo = {
     makeMap: function(position){
       var currentLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
+      console.log("currentLocation below")
+      console.log(currentLocation)
       var newMap     = new Map(currentLocation);
       var styledMap  = new google.maps.StyledMapType(newMap.mapStyles(), { name: "Styled Map"});
       googleMap      = new google.maps.Map(newMap.pageLocation, newMap.mapOptions(position))
