@@ -1,4 +1,4 @@
-LocalHUNT
+LocalHUNT - beta
 =========
 ##Visit [LocalHUNT](http://tinylandmarks.herokuapp.com/ "LocalHUNT") on Heroku!!
 LocalHUNT facilitates urban exploration. When I first moved to San Francsico I walked as much as the city
